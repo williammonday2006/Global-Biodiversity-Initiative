@@ -34,6 +34,32 @@ public class Main {
 
             System.out.println("Updated species populations:");
             System.out.println(species);
+
+            if (!species.isEmpty()) {
+                String mostFrequentSpecies = null;
+                String leastFrequentSpecies = null;
+                int maxCount = Integer.MIN_VALUE;
+                int minCount = Integer.MAX_VALUE;
+
+                for (String name : species.keySet()) {
+                    int count = species.get(name);
+
+                    if (count > maxCount) {
+                        maxCount = count;
+                        mostFrequentSpecies = name;
+                    }
+
+                    if (count < minCount) {
+                        minCount = count;
+                        leastFrequentSpecies = name;
+                    }
+                }
+
+                System.out.println("Most frequent species: "
+                        + mostFrequentSpecies + " (" + maxCount + ")");
+                System.out.println("Least frequent species: "
+                        + leastFrequentSpecies + " (" + minCount + ")");
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Could not find sightings.txt.");
         }
