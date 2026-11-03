@@ -13,9 +13,7 @@ public class Main {
         species.put("Rabbit", 75);
         species.put("Bear", 12);
 
-        try {
-            Scanner fileScanner = new Scanner(new File("sightings.txt"));
-
+        try (Scanner fileScanner = new Scanner(new File("sightings.txt"))) {
             while (fileScanner.hasNextLine()) {
                 String name = fileScanner.nextLine().trim();
 
@@ -29,8 +27,6 @@ public class Main {
                     species.put(name, 1);
                 }
             }
-
-            fileScanner.close();
 
             System.out.println("Updated species populations:");
             System.out.println(species);
@@ -59,7 +55,10 @@ public class Main {
                         + mostFrequentSpecies + " (" + maxCount + ")");
                 System.out.println("Least frequent species: "
                         + leastFrequentSpecies + " (" + minCount + ")");
+            } else {
+                System.out.println("No species were found in the registry.");
             }
+
         } catch (FileNotFoundException e) {
             System.out.println("Could not find sightings.txt.");
         }

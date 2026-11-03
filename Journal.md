@@ -10,3 +10,9 @@ I used a Scanner to read sightings.txt one line at a time. For each species, I c
 # Phase 3
 
 I added a loop that goes through every species in the HashMap and compares its population count to the current maximum and minimum. The program keeps track of the species with the highest and lowest counts and prints both results. Looking up one species by its name is usually O(1) on average with a HashMap, while finding the maximum and minimum requires checking every species, which takes O(n) time.
+
+
+# Phase 4
+
+I tested my program using an empty sightings file, a file where every species appeared once, and a file where one species appeared multiple times. The program correctly updated the population counts and identified the most and least frequent species in each test. I also reviewed my code for possible problems. One improvement I made was using try-with-resources so the file scanner closes automatically. I learned that testing different scenarios is important because it helps catch problems that might not appear during normal use.
+
