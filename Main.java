@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,17 +13,29 @@ public class Main {
         species.put("Rabbit", 75);
         species.put("Bear", 12);
 
-        Scanner scanner = new Scanner(System.in);
+        try {
+            Scanner fileScanner = new Scanner(new File("sightings.txt"));
 
-        System.out.print("Enter a species name to check its population: ");
-        String name = scanner.nextLine().trim();
+            while (fileScanner.hasNextLine()) {
+                String name = fileScanner.nextLine().trim();
 
-        if (species.containsKey(name)) {
-            System.out.println(name + " population: " + species.get(name));
-        } else {
-            System.out.println(name + " is not currently in the registry.");
+                if (name.isEmpty()) {
+                    continue;
+                }
+
+                if (species.containsKey(name)) {
+                    species.put(name, species.get(name) + 1);
+                } else {
+                    species.put(name, 1);
+                }
+            }
+
+            fileScanner.close();
+
+            System.out.println("Updated species populations:");
+            System.out.println(species);
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not find sightings.txt.");
         }
-
-        scanner.close();
     }
 }
